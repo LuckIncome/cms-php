@@ -2,39 +2,48 @@
 
 namespace Engine\Core\Template;
 
+use Cms\Model\MenuItem\MenuItemRepository;
 use Engine\DI\DI;
 use Cms\Model\Menu\MenuRepository;
+
 /**
-* class Menu
-* @package Engine\Core\Template
-*/
-class Menu 
+ * Class Menu
+ * @package Engine\Core\Template
+ */
+class Menu
 {
-	/**
-	* @var DI
-	*/
-	protected static $di;
-	/**
-	* @var MenuRepository
-	*/
-	protected static $menuRepository;
+    /**
+     * @var DI
+     */
+    protected static $di;
 
-	/**
-	* Menu constructor.
-	* @param $di
-	*/
-	public function __construct($di)
-	{
-	    self::$di = $di;
-	    self::$menuRepository = new MenuRepository(self::$di);
-	}
+    /**
+     * @var MenuRepository
+     */
+    protected static $menuRepository;
 
-	public static function show() {
+    /**
+     * @var MenuItemRepository
+     */
+    protected static $menuItemRepository;
 
-	}
+    /**
+     * Menu constructor.
+     * @param $di
+     */
+    public function __construct($di)
+    {
+        self::$di = $di;
+        self::$menuRepository = new MenuRepository(self::$di);
+        self::$menuItemRepository = new MenuItemRepository(self::$di);
+    }
 
-	public static function getItems() {
-		return self::$menuRepository->getAllItems();
-	}
+    /**
+     * @param int $menuId
+     * @return mixed
+     */
+    public static function getItems($menuId)
+    {
+        return self::$menuItemRepository->getItems($menuId);
+    }
 }
-
