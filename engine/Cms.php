@@ -30,6 +30,8 @@ class Cms
 		try{
 			$this->router->add('home', '/', 'HomeController:index');
 			$this->router->add('news', '/news', 'HomeController:news');
+			$this->router->add('news_single', '/news/(id:int)', 'HomeController:news');
+
 			$routerDispatch = $this->router->dispatch(Common::getMethod(), Common::getPathUrl());
 			if($routerDispatch == null) 
 			{
@@ -38,6 +40,7 @@ class Cms
 			list($class, $action) = explode(':', $routerDispatch->getController(), 2);
 			$controller = '\\Cms\\Controller\\' . $class;
 			$parameters = $routerDispatch->getParameters();
+			// print_r($parameters);
 			call_user_func_array([new $controller($this->di), $action], $parameters);
 		} catch(\Exception $e) {
 			echo $e->getMessage();
