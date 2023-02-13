@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Июл 04 2020 г., 14:18
+-- Время создания: Июл 04 2020 г., 14:53
 -- Версия сервера: 5.7.25
 -- Версия PHP: 7.3.2
 
@@ -32,18 +32,19 @@ CREATE TABLE `menu` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `parent` tinyint(1) NOT NULL DEFAULT '0',
-  `position` int(5) NOT NULL
+  `position` int(5) NOT NULL,
+  `link` varchar(255) NOT NULL DEFAULT '#'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `menu`
 --
 
-INSERT INTO `menu` (`id`, `name`, `parent`, `position`) VALUES
-(1, 'Home', 0, 0),
-(2, 'About', 0, 0),
-(3, 'Sample Post', 0, 0),
-(4, 'Contact', 0, 0);
+INSERT INTO `menu` (`id`, `name`, `parent`, `position`, `link`) VALUES
+(1, 'Home', 0, 0, '#'),
+(2, 'About', 0, 0, '#'),
+(3, 'Sample Post', 0, 0, '#'),
+(4, 'Contact', 0, 0, '#');
 
 -- --------------------------------------------------------
 

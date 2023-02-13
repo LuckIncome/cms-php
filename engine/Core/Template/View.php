@@ -21,6 +21,10 @@ class View
      */
     protected $setting;
     /**
+     * @var Menu
+     */
+    protected $menu;
+    /**
      * View constructor.
      * @param DI $di
      */
@@ -29,6 +33,7 @@ class View
         $this->di    = $di;
         $this->theme = new Theme();
         $this->setting = new Setting($di);
+        $this->menu = new Menu($di);
     }
 
     /**
@@ -42,7 +47,7 @@ class View
         if (file_exists($functions)) {
             include_once $functions;
         }
-        
+
         $templatePath = $this->getTemplatePath($template, ENV);
 
         if (!is_file($templatePath)) {
