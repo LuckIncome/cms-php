@@ -22,7 +22,7 @@ class Config
 		$path = $_SERVER['DOCUMENT_ROOT'] . '/' . mb_strtolower(ENV) . '/Config/' . $group . '.php';
 		if(file_exists($path)) {
 			$items = require_once $path;
-			if(is_array($items)) {
+			if(!empty($items)) {
 				return $items;
 			} else {
 				throw new \Exception(
