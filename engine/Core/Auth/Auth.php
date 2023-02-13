@@ -30,9 +30,6 @@ class Auth implements AuthInterface
 	public function authorize($user) {
 		Cookie::set('auth_authorized', true);
 		Cookie::set('auth_user', $user);
-
-		$this->authorized = true;
-		$this->hash_user = $user;
 	}
 	/**
 	* User unauthorization
@@ -41,9 +38,6 @@ class Auth implements AuthInterface
 	public function unAuthorize() {
 		Cookie::delete('auth_authorized');
 		Cookie::delete('auth_user');
-
-		$this->authorized = false;
-		$this->hash_user = null;
 	}
 	/**
 	* Generates a new random password salt
