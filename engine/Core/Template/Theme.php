@@ -15,23 +15,37 @@ class Theme
         'sidebar' => 'sidebar-%s',
     ];
 
-    const URL_THEME_MASK = '/content/themes/%s';
+    const URL_THEME_MASK = '%s/content/themes/%s';
 
 
     /**
      * Url current theme
      * @type string
      */
-    protected static $url = '';
-
+    protected static $url = '';    
     /**
      * @var array
      */
     protected static $data = [];
-
+    /**
+     * @var Asset
+     */
+    public $asset;
+    /**
+     * @var Theme
+     */
+    public $theme;
+    /**
+     * Theme constructor
+     */
+    public function __construct() {
+        $this->theme = $this;
+        $this->asset = new Asset();
+    }
     public static function getUrl() {
         $currentTheme = Config::item('defaultTheme', 'main');
-        return sprintf(self::URL_THEME_MASK, $currentTheme);
+        $baseUrl = Config::item('baseUrl', 'main');
+        return sprintf(self::URL_THEME_MASK, $baseUrl, $currentTheme);
     }
     /**
      * @param null $name
@@ -104,4 +118,10 @@ class Theme
     {
         static::$data = $data;
     }
+
+    public static function getThemePath()
+    {
+        return ROOT_DIR . '/content/themes/default';
+    } 
 }
+
