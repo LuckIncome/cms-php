@@ -1,15 +1,15 @@
 <?php
 
-namespace Admin\Model\User;
+namespace Admin\Model\Page;
 
 use Engine\Model;
 
-class UserRepository extends Model
+class PageRepository extends Model
 {
-    public function getUsers()
+    public function getPages()
     {
         $sql = $this->queryBuilder->select()
-            ->from('user')
+            ->from('page')
             ->orderBy('id', 'DESC')
             ->sql();
         return $this->db->query($sql);
