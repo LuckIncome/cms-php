@@ -7,9 +7,13 @@ use Engine\Core\Auth\Auth;
 class AdminController extends Controller
 {
 	/**
-	*@var Auth
+	* @var Auth
 	*/
 	protected $auth;
+	/**
+	* @var array
+	*/
+	public $data = [];
 	/**
 	*AdminController constructor
 	*@param \Engine\DI\DI $di
