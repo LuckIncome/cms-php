@@ -2,10 +2,18 @@
 
 namespace Engine;
 
+use Engine\Di\Di;
+
 class Load
 {
     const MASK_MODEL_ENTITY     = '\%s\Model\%s\%s';
     const MASK_MODEL_REPOSITORY = '\%s\Model\%s\%sRepository';
+    /**
+     * @var \Engine\DI\DI
+     */
+    public function __construct(Di $di) {
+        $this->di = $di;
+    }
 
     /**
      * @param $modelName
@@ -14,25 +22,22 @@ class Load
      */
     public function model($modelName, $modelDir = false)
     {
-        global $di;
-
         $modelName  = ucfirst($modelName);
-        $model      = new \stdClass();
         $modelDir   = $modelDir ? $modelDir : $modelName;
 
-        $namespaceEntity = sprintf(
-            self::MASK_MODEL_ENTITY,
-            ENV, $modelDir, $modelName
-        );
-
-        $namespaceRepository = sprintf(
+        $namespaceModel = sprintf(
             self::MASK_MODEL_REPOSITORY,
             ENV, $modelDir, $modelName
         );
+        $isClassModel = class_exists($namespaceModel);
+        if($isClassModel) {
+            // Set to DI
+            $modelRegistry = $this->di->get('model') ?: new \stdClass();
+            $modelRegistry->{lcfirst($modelName)} = new $namespaceModel($this->di);
 
-        $model->entity     = $namespaceEntity;
-        $model->repository = new $namespaceRepository($di);
-
-        return $model;
+            $this->di->set('model', $modelRegistry);  
+        }
+        
+        return $isClassModel;
     }
 }
