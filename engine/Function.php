@@ -7,24 +7,29 @@
  * @return string
  */
 
-if(!defined('DS')) define('DS', DIRECTORY_SEPARATOR);
+
 
 function path($section)
-{
+{   
+    if(!defined('DS')) define('DS', DIRECTORY_SEPARATOR);
+    $pathMask = ROOT_DIR . DS . '%s';
+    if(ENV == 'Cms') {
+        $pathMask = ROOT_DIR . DS . strtolower(ENV). DS . '%s';
+    }
     //if(!defined('DS')) define('DS', '/');
     // Return path to correct section.
     switch (strtolower($section))
     {
         case 'controller':
-            return ROOT_DIR . DS . 'Controller';
+            return sprintf($pathMask, 'Controller');
         case 'config':
-            return ROOT_DIR . DS . 'Config';
+            return sprintf($pathMask, 'Config');
         case 'model':
-            return ROOT_DIR . DS . 'Model';
+            return sprintf($pathMask, 'Model');
         case 'view':
-            return ROOT_DIR . DS . 'View';
+            return sprintf($pathMask, 'View');
         case 'language':
-            return ROOT_DIR . DS . 'Language';
+            return sprintf($pathMask, 'Language');
         default:
             return ROOT_DIR;
     }

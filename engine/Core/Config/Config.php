@@ -4,51 +4,80 @@ namespace Engine\Core\Config;
 
 class Config
 {
+
     /**
-     * @param $key
-     * @param string $group
-     * @return null
+     * Retrieves a config item.
+     *
+     * @param  string  $key
+     * @param  string  $group
+     * @return mixed
      */
     public static function item($key, $group = 'main')
     {
-        $groupItems = static::file($group);
+        if (!Repository::retrieve($group, $key)) {
+            self::file($group);
+        }
 
-        return isset($groupItems[$key]) ? $groupItems[$key] : null;
+        return Repository::retrieve($group, $key);
     }
 
     /**
-     * @param $group
-     * @return bool|mixed
+     * Retrieves a group config items.
+     *
+     * @param  string  $group  The item group.
+     * @return mixed
+     */
+    public static function group($group)
+    {
+        if (!Repository::retrieveGroup($group)) {
+            self::file($group);
+        }
+
+        return Repository::retrieveGroup($group);
+    }
+
+    /**
+     * @param string $group
+     * @return bool
      * @throws \Exception
      */
-    public static function file($group)
+    public static function file($group = 'main')
     {
-        $path = $_SERVER['DOCUMENT_ROOT'] . '/' . mb_strtolower(ENV) . '/Config/' . $group . '.php';
+        $path = path('config') . DS . $group . '.php';
 
-        if(file_exists($path))
-        {
-            $items = require_once $path;
+        // Check that the file exists before we attempt to load it.
+        if (file_exists($path)) {
+            // Get items from the file.
+            $items = include $path;
 
-            if(!empty($items))
-            {
-                return $items;
-            }
-            else
-            {
+            // Items must be an array.
+            if (is_array($items)) {
+                // Store items.
+                foreach ($items as $key => $value) {
+                    Repository::store($group, $key, $value);
+                }
+
+                // Successful file load.
+                return true;
+            } else {
                 throw new \Exception(
                     sprintf(
-                        'Config file <strong>%s</strong> is not a valid array.', $path
+                        'Config file <strong>%s</strong> is not a valid array.',
+                        $path
                     )
                 );
             }
-        }
-        else
-        {
+        } else {
             throw new \Exception(
-                sprintf('Cannot load config from file, file <strong>%s</strong> does not exist.', $path)
+                sprintf(
+                    'Cannot load config from file, file <strong>%s</strong> does not exist.',
+                    $path
+                )
             );
         }
 
+        // File load unsuccessful.
         return false;
     }
+
 }
