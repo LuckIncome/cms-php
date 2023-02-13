@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Июл 04 2020 г., 14:53
--- Версия сервера: 5.7.25
--- Версия PHP: 7.3.2
+-- Время создания: Фев 13 2023 г., 23:19
+-- Версия сервера: 5.7.33
+-- Версия PHP: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -129,7 +128,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `email`, `password`, `role`, `hash`, `date_reg`) VALUES
-(1, 'admin@admin.com', 'b59c67bf196a4758191e42f76670ceba', 'admin', '36a6e91ad5d0afb5481677748e42e329', '2020-06-30 19:36:06'),
+(1, 'admin@admin.com', '202cb962ac59075b964b07152d234b70', 'admin', '525d1a00e085fe41fc17b63b127e4187', '2020-06-30 19:36:06'),
 (2, 'test@admin.com', 'c81e728d9d4c2f636f067f89cc14862c', 'user', 'new', '2020-07-01 23:55:36'),
 (3, 'test@admin.com', '45c48cce2e2d7fbdea1afc51c7c6ad26', 'user', 'new', '2020-07-01 23:55:41');
 
