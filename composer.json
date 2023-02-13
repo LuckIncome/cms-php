@@ -1,0 +1,17 @@
+{
+    "name": "hex/example",
+    "description": "example package",
+    "authors": [
+        {
+            "name": "hex",
+            "email": "hex@hexlet.io"
+        }
+    ],
+    "require": {},
+    "autoload": {
+    	"psr-4": {
+    		"Engine\\": "engine",
+    		"Engine\\DI\\": "engine/DI"
+    	}
+    }
+}
