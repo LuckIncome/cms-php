@@ -6,20 +6,24 @@ use Engine\Cms;
 use Engine\DI\DI;
 
 try{
-	// Dependency injection
-	$di = new DI();
+    // Dependency injection
+    $di = new DI();
 
-	$services = require __DIR__ . '/Config/Service.php';
-	// Init services
-	foreach ($services as $service) 
-	{
-		$provider = new $service($di);
-		$provider->init();
-	}
+    $services = require __DIR__ . '/Config/Service.php';
 
-	$cms = new Cms($di);
-	$cms->run();
-}catch (\ErrorException $e) 
-{
-	echo $e->getMessage();
+    // Init services
+    foreach($services as $service)
+    {
+        $provider = new $service($di);
+        $provider->init();
+    }
+
+    // Init models
+    $di->set('model', []);
+
+    $cms = new Cms($di);
+    $cms->run();
+
+}catch (\ErrorException $e) {
+    echo $e->getMessage();
 }
