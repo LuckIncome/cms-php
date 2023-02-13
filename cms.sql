@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Июл 03 2020 г., 15:53
+-- Время создания: Июл 04 2020 г., 14:18
 -- Версия сервера: 5.7.25
 -- Версия PHP: 7.3.2
 
@@ -25,6 +25,29 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `menu`
+--
+
+CREATE TABLE `menu` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `parent` tinyint(1) NOT NULL DEFAULT '0',
+  `position` int(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `menu`
+--
+
+INSERT INTO `menu` (`id`, `name`, `parent`, `position`) VALUES
+(1, 'Home', 0, 0),
+(2, 'About', 0, 0),
+(3, 'Sample Post', 0, 0),
+(4, 'Contact', 0, 0);
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `page`
 --
 
@@ -40,7 +63,7 @@ CREATE TABLE `page` (
 --
 
 INSERT INTO `page` (`id`, `title`, `content`, `date`) VALUES
-(1, 'asd123sa', '<p>​asdas</p>', '2020-07-02 19:28:37');
+(1, 'asd123sa3', '<p>​asdas</p>', '2020-07-02 19:28:37');
 
 -- --------------------------------------------------------
 
@@ -60,7 +83,7 @@ CREATE TABLE `post` (
 --
 
 INSERT INTO `post` (`id`, `title`, `content`, `date`) VALUES
-(1, 'asd12', '<p>​dsfs</p>', '2020-07-03 12:00:03');
+(1, 'asd12w', '<p>​dsfs</p>', '2020-07-03 12:00:03');
 
 -- --------------------------------------------------------
 
@@ -81,7 +104,7 @@ CREATE TABLE `setting` (
 
 INSERT INTO `setting` (`id`, `name`, `key_field`, `value`) VALUES
 (1, 'Name site', 'name_site', 'Cms'),
-(2, 'Description', 'description', 'Example description'),
+(2, 'Description', 'description', 'Example description Cms'),
 (3, 'Admin Email', 'admin_email', 'admin@admin.com'),
 (4, 'Language', 'language', 'english');
 
@@ -105,13 +128,19 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `email`, `password`, `role`, `hash`, `date_reg`) VALUES
-(1, 'admin@admin.com', 'b59c67bf196a4758191e42f76670ceba', 'admin', '3637a56927425d68abbaa348afd309db', '2020-06-30 19:36:06'),
+(1, 'admin@admin.com', 'b59c67bf196a4758191e42f76670ceba', 'admin', '36a6e91ad5d0afb5481677748e42e329', '2020-06-30 19:36:06'),
 (2, 'test@admin.com', 'c81e728d9d4c2f636f067f89cc14862c', 'user', 'new', '2020-07-01 23:55:36'),
 (3, 'test@admin.com', '45c48cce2e2d7fbdea1afc51c7c6ad26', 'user', 'new', '2020-07-01 23:55:41');
 
 --
 -- Индексы сохранённых таблиц
 --
+
+--
+-- Индексы таблицы `menu`
+--
+ALTER TABLE `menu`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Индексы таблицы `page`
@@ -142,6 +171,12 @@ ALTER TABLE `user`
 --
 -- AUTO_INCREMENT для сохранённых таблиц
 --
+
+--
+-- AUTO_INCREMENT для таблицы `menu`
+--
+ALTER TABLE `menu`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `page`
