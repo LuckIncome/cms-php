@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Июл 04 2020 г., 17:49
+-- Время создания: Июл 04 2020 г., 14:53
 -- Версия сервера: 5.7.25
 -- Версия PHP: 7.3.2
 
@@ -30,46 +30,21 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `menu` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL
+  `name` varchar(255) NOT NULL,
+  `parent` tinyint(1) NOT NULL DEFAULT '0',
+  `position` int(5) NOT NULL,
+  `link` varchar(255) NOT NULL DEFAULT '#'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `menu`
 --
 
-INSERT INTO `menu` (`id`, `name`) VALUES
-(1, 'header_menu'),
-(2, 'footer_menu'),
-(3, 'waeaw');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `menu_item`
---
-
-CREATE TABLE `menu_item` (
-  `id` int(11) NOT NULL,
-  `menu_id` int(11) NOT NULL DEFAULT '0',
-  `name` varchar(255) NOT NULL,
-  `parent` tinyint(1) NOT NULL DEFAULT '0',
-  `position` int(11) NOT NULL DEFAULT '999',
-  `link` varchar(255) NOT NULL DEFAULT '#'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `menu_item`
---
-
-INSERT INTO `menu_item` (`id`, `menu_id`, `name`, `parent`, `position`, `link`) VALUES
-(1, 0, 'Home', 0, 0, '#'),
-(2, 0, 'About', 0, 0, '#'),
-(3, 0, 'Sample Post', 0, 0, '#'),
-(4, 0, 'Contact', 0, 0, '#'),
-(7, 1, 'New item1', 0, 0, '#'),
-(8, 1, 'New item2', 0, 1, '#'),
-(9, 1, 'New item3', 0, 2, '#'),
-(10, 3, 'New item', 0, 999, '#');
+INSERT INTO `menu` (`id`, `name`, `parent`, `position`, `link`) VALUES
+(1, 'Home', 0, 0, '#'),
+(2, 'About', 0, 0, '#'),
+(3, 'Sample Post', 0, 0, '#'),
+(4, 'Contact', 0, 0, '#');
 
 -- --------------------------------------------------------
 
@@ -154,7 +129,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `email`, `password`, `role`, `hash`, `date_reg`) VALUES
-(1, 'admin@admin.com', 'b59c67bf196a4758191e42f76670ceba', 'admin', 'a1886db1ec9048397239b1dac1184aa0', '2020-06-30 19:36:06'),
+(1, 'admin@admin.com', 'b59c67bf196a4758191e42f76670ceba', 'admin', '36a6e91ad5d0afb5481677748e42e329', '2020-06-30 19:36:06'),
 (2, 'test@admin.com', 'c81e728d9d4c2f636f067f89cc14862c', 'user', 'new', '2020-07-01 23:55:36'),
 (3, 'test@admin.com', '45c48cce2e2d7fbdea1afc51c7c6ad26', 'user', 'new', '2020-07-01 23:55:41');
 
@@ -166,12 +141,6 @@ INSERT INTO `user` (`id`, `email`, `password`, `role`, `hash`, `date_reg`) VALUE
 -- Индексы таблицы `menu`
 --
 ALTER TABLE `menu`
-  ADD PRIMARY KEY (`id`);
-
---
--- Индексы таблицы `menu_item`
---
-ALTER TABLE `menu_item`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -208,13 +177,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT для таблицы `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT для таблицы `menu_item`
---
-ALTER TABLE `menu_item`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `page`

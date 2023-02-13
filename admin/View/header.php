@@ -31,33 +31,15 @@
             <a class="navbar-brand" href="#">Admin CMS</a>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/admin/">
-                            <i class="icon-speedometer icons"></i>
-                            <?= $lang->dashboardMenu['home'] ?>
-                        </a>
-                    </li>
+                    <?php foreach (Customize::getInstance()->getAdminMenuItems() as $key => $item): ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin/pages/">
-                            <i class="icon-doc icons"></i>
-                            <?= $lang->dashboardMenu['pages'] ?>
+                        <a class="nav-link" href="<?= $item['urlPath'] ?>">
+                            <i class="<?= $item['classIcon'] ?>"></i>
+                           <?= $lang->dashboardMenu[$key] ?> 
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/admin/posts/">
-                            <i class="icon-pencil icons"></i>
-                            <?= $lang->dashboardMenu['posts'] ?>
-                        </a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" href="/admin/settings/general/">
-                            <i class="icon-equalizer icons"></i>
-                            <?= $lang->dashboardMenu['settings'] ?>
-                        </a>
-                    </li>
+                    <?php endforeach; ?>
                 </ul>
-            </div>
-
             <div class="right-toolbar">
                 <a href="/admin/logout/">
                     <i class="icon-logout icons"></i> Logout

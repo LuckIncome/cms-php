@@ -7,4 +7,5 @@ return [
     Engine\Service\Config\Provider::class,
     Engine\Service\Request\Provider::class,
     Engine\Service\Load\Provider::class,
+    Engine\Service\Customize\Provider::class,
 ];

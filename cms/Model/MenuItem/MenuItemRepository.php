@@ -4,16 +4,17 @@ namespace Cms\Model\MenuItem;
 
 use Engine\Model;
 
+/**
+* class Menu
+* @package Cms\Model\MenuItem
+*/
 class MenuItemRepository extends Model
 {
     const NEW_MENU_ITEM_NAME = 'New item';
+    const FIELD_NAME = 'name';
+    const FIELD_LINK = 'link';
 
-    /**
-     * @param int $menuId
-     * @param array $params
-     * @return mixed
-     */
-     public function getAllItems()
+    public function getAllItems()
     {
         $sql = $this->queryBuilder
             ->select()
@@ -23,7 +24,11 @@ class MenuItemRepository extends Model
 
         return $this->db->query($sql);
     }
-    
+    /**
+     * @param int $menuId
+     * @param array $params
+     * @return mixed
+     */
     public function getItems($menuId, $params = [])
     {
         $sql = $this->queryBuilder
@@ -56,6 +61,44 @@ class MenuItemRepository extends Model
 
     /**
      * @param array $params
+     * @return int
+     */
+    public function update($params = [])
+    {
+        if (empty($params)) {
+            return 0;
+        }
+
+        $menuItem = new MenuItem($params['item_id']);
+
+        if ($params['field'] == self::FIELD_NAME) {
+            $menuItem->setName($params['value']);
+        }
+
+        if ($params['field'] == self::FIELD_LINK) {
+            $menuItem->setLink($params['value']);
+        }
+
+        return $menuItem->save();
+    }
+
+    /**
+     * @param int $itemId
+     * @return mixed
+     */
+    public function remove($itemId)
+    {
+        $sql = $this->queryBuilder
+            ->delete()
+            ->from('menu_item')
+            ->where('id', $itemId)
+            ->sql();
+
+        return $this->db->query($sql, $this->queryBuilder->values);
+    }
+
+    /**
+     * @param array $params
      */
     public function sort($params = [])
     {
@@ -73,20 +116,5 @@ class MenuItemRepository extends Model
                 );
             }
         }
-    }
-
-    /**
-     * @param int $itemId
-     * @return mixed
-     */
-    public function remove($itemId)
-    {
-        $sql = $this->queryBuilder
-            ->delete()
-            ->from('menu_item')
-            ->where('id', $itemId)
-            ->sql();
-
-        return $this->db->query($sql, $this->queryBuilder->values);
-    }
+    }   
 }
