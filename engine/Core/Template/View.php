@@ -2,11 +2,20 @@
 
 namespace Engine\Core\Template;
 
+use Engine\Core\Template\Theme;
+
 class View
 {
+	/**
+	* @var \Engine\Core\Template\Theme
+	*/
+	protected $theme;
+	/**
+	* View constructor
+	*/
 	public function __construct() 
 	{
-
+		$this->theme = new Theme();
 	}
 	/**
 	* CMS constructor
@@ -22,6 +31,7 @@ class View
 		{
 			throw new \InvalidArgumentException(sprintf('Template "%s" not found in "%s"', $template, $templatePath));
 		}
+		$this->theme->setData($vars);
 		extract($vars);
 		ob_start();
 		ob_implicit_flush(0);
