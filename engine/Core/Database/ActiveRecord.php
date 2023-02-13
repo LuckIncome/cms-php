@@ -40,17 +40,24 @@ trait ActiveRecord
     {
         return $this->table;
     }
-    public function findOne() {
+
+    /**
+     * @return object|null
+     */
+    public function findOne()
+    {
         $find = $this->db->query(
             $this->queryBuilder
-            ->select()
-            ->from($this->getTable())
-            ->where('id', $this->id)
-            ->sql(),
+                ->select()
+                ->from($this->getTable())
+                ->where('id', $this->id)
+                ->sql(),
             $this->queryBuilder->values
         );
+
         return isset($find[0]) ? $find[0] : null;
     }
+
     /**
      *  Save User
      */

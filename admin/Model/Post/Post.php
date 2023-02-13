@@ -1,14 +1,14 @@
 <?php
 
-namespace Admin\Model\Page;
+namespace Admin\Model\Post;
 
 use Engine\Core\Database\ActiveRecord;
 
-class Page
+class Post
 {
     use ActiveRecord;
 
-    protected $table = 'page';
+    protected $table = 'post';
 
     public $id;
 

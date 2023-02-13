@@ -2,4 +2,5 @@
 
 namespace Engine\Core\Auth;
 
-interface AuthInterface {}
+interface AuthInterface
+{}

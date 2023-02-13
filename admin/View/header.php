@@ -21,7 +21,6 @@
     <!-- Redactor CSS -->
     <link rel="stylesheet" href="/admin/Assets/js/plugins/redactor/redactor.css">
 </head>
-
 <body>
 <header>
     <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
@@ -34,22 +33,26 @@
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
                         <a class="nav-link" href="#">
-                            <i class="icon-speedometer icons"></i> Home
+                            <i class="icon-speedometer icons"></i>
+                            <?= $lang->dashboardMenu['home'] ?>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/admin/pages/">
-                            <i class="icon-doc icons"></i> Pages
+                            <i class="icon-doc icons"></i>
+                            <?= $lang->dashboardMenu['pages'] ?>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="icon-pencil icons"></i> Posts
+                        <a class="nav-link" href="/admin/posts/">
+                            <i class="icon-pencil icons"></i>
+                            <?= $lang->dashboardMenu['posts'] ?>
                         </a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link">
-                            <i class="icon-equalizer icons"></i> Settings
+                            <i class="icon-equalizer icons"></i>
+                            <?= $lang->dashboardMenu['settings'] ?>
                         </a>
                     </li>
                 </ul>
