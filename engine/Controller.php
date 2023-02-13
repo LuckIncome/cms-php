@@ -13,6 +13,7 @@ abstract class Controller
 	protected $db;
 	protected $view;
 	protected $config;
+	protected $request;
 	/**
 	*Controller constructor
 	*@param DI $di
@@ -22,5 +23,6 @@ abstract class Controller
 		$this->di = $di;
 		$this->view = $this->di->get('view');
 		$this->config = $this->di->get('config');
+		$this->request = $this->di->get('request');
 	}
 }
